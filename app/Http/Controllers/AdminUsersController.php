@@ -18,6 +18,7 @@ class AdminUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $path = 'I:\xampp\htdocs';
     public function index()
     {
         $users = User::all();
@@ -118,8 +119,13 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        unlink('I:\xampp\htdocs'.$user->photo->file);
-        $user->delete();
+        if ($user->file){
+            unlink($this->path . $user->photo->file);
+            $user->delete();
+        }
+        else{
+            $user->delete();
+        }
         Session::flash('delete_user','The user has been deleted');
         return redirect('admin/users');
     }
