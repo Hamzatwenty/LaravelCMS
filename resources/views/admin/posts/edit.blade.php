@@ -6,7 +6,7 @@
     <div class="row">
 
         <div class="col-sm-3">
-            <img class='img-responsive' src="{{$post->photo->file}}" alt="">
+            <img class='img-responsive' src="{{$post->photo ? $post->photo->file : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/220px-User_icon_2.svg.png'}}" alt="">
         </div>
 
         <div class="col-sm-9">

@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\AdminMediaController;
 use Illuminate\Support\Facades\View;
 
 Route::get('/', function () {
@@ -27,7 +28,13 @@ Route::get('/admin',function (){
 
 Route::group(['middleware' => 'admin'], function (){
 
+    Route::get('admin/media/upload', array('as' => 'admin.media.upload', function(){
+
+        return (new AdminMediaController)->upload();
+    }));
+
     Route::resource('admin/users','AdminUsersController');
     Route::resource('admin/posts','AdminPostsController');
     Route::resource('admin/categories','AdminCategoriesController');
+    Route::resource('admin/media','AdminMediaController');
 });
